@@ -82,19 +82,19 @@ function App() {
               <Banner />
 
               <Switch>
-                <Route path="/" exact>
+                <Route path="RA_diploma/" exact>
                   <MainPage />
                 </Route>
-                <Route path="/catalog">
+                <Route path="RA_diploma/catalog">
                   <CatalogPage />
                 </Route>
-                <Route path="/about">
+                <Route path="RA_diploma/about">
                   <AboutPage />
                 </Route>
-                <Route path="/contacts">
+                <Route path="RA_diploma/contacts">
                   <ContactsPage />
                 </Route>
-                <Route path="/chart">
+                <Route path="RA_diploma/chart">
                   <ChartPage />
                 </Route>
                 <Route>
