@@ -3,13 +3,13 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import headerlogo from "./img/header-logo.png";
 import "./App.css";
 
-import MainPage from "./components/MainPage";
-import CatalogPage from "./components/CatalogPage";
-import AboutPage from "./components/AboutPage";
-import ContactsPage from "./components/ContactsPage";
-import ChartPage from "./components/ChartPage";
-import ErrorPage from "./components/ErrorPage";
-import Banner from "./components/Banner";
+import MainPage from "./components/pages/MainPage";
+import CatalogPage from "./components/pages/CatalogPage";
+import AboutPage from "./components/pages/AboutPage";
+import ContactsPage from "./components/pages/ContactsPage";
+import ChartPage from "./components/pages/ChartPage";
+import ErrorPage from "./components/pages/ErrorPage";
+import Banner from "./components/elements/Banner";
 
 function App() {
   return (
