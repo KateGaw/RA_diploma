@@ -2,7 +2,7 @@
 /*eslint-disable array-callback-return*/
 
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../../../utils/api";
 
 import Preloader from "../Preloader";
 
@@ -38,39 +38,21 @@ const Catalog = (props) => {
       }
       setIsLoading(false);
     } else {
-      axios
-        .get(
-          props.id === 0
-            ? "http://localhost:7070/api/items"
-            : `http://localhost:7070/api/items?categoryId=${props.id}`
-        )
-        .then((response) => {
-          setCatalog(response.data);
-          setIsLoading(false);
-        });
+      api.getCatalogItems(props.id, setCatalog, setIsLoading);
     }
   }, [props]);
 
   // LOAD DATA WHEN ADD_BUTTON CLICKED
   useEffect(() => {
     if (buttonClick) {
-      axios
-        .get(
-          props.id === 0
-            ? `http://localhost:7070/api/items?offset=${itemsCounter}`
-            : `http://localhost:7070/api/items?categoryId=${props.id}&offset=${itemsCounter}`
-        )
-        .then((response) => {
-          if (response.data.length === 0) {
-            //если данных нет, то скрываем кнопку
-            setButtonVisile(false);
-            setButtonClick(false);
-          } else {
-            setButtonClick(false);
-            setNewItems(response.data);
-            setItemsCounter((i) => i + 6);
-          }
-        });
+      api.getMoreItems(
+        props.id,
+        itemsCounter,
+        setButtonVisile,
+        setButtonClick,
+        setNewItems,
+        setItemsCounter
+      );
     }
   }, [props.id, buttonClick, itemsCounter]);
 

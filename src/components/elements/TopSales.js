@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Preloader from "./Preloader";
-import axios from "axios";
+import api from "../../utils/api";
 
 const TopSales = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -8,10 +8,7 @@ const TopSales = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    axios.get("http://localhost:7070/api/top-sales").then((response) => {
-      setSales(response.data);
-      setIsLoading(false);
-    });
+    api.getTopSales(setSales, setIsLoading);
   }, []);
 
   return (
@@ -32,7 +29,10 @@ const TopSales = () => {
                 <div className="card-body">
                   <p className="card-text">{item.title}</p>
                   <p className="card-text">{item.price}</p>
-                  <a href="/products/1.html" className="btn btn-outline-primary">
+                  <a
+                    href="/products/1.html"
+                    className="btn btn-outline-primary"
+                  >
                     Заказать
                   </a>
                 </div>
