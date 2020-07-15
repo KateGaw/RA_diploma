@@ -11,6 +11,7 @@ import ContactsPage from "./components/pages/ContactsPage";
 import ChartPage from "./components/pages/ChartPage";
 import ErrorPage from "./components/pages/ErrorPage";
 import Banner from "./components/elements/Banner";
+import SearchBar from "./components/elements/Search/SearchBar";
 
 function App() {
   return (
@@ -51,10 +52,7 @@ function App() {
 
                   <div>
                     <div className="header-controls-pics">
-                      <div
-                        data-id="search-expander"
-                        className="header-controls-pic header-controls-search"
-                      ></div>
+                      <SearchBar />
                       {/* <!-- Do programmatic navigation on click to /cart.html --> */}
                       <Link to="/chart">
                         <div className="header-controls-pic header-controls-cart">
@@ -63,12 +61,6 @@ function App() {
                         </div>
                       </Link>
                     </div>
-                    <form
-                      data-id="search-form"
-                      className="header-controls-search-form form-inline invisible"
-                    >
-                      <input className="form-control" placeholder="Поиск" />
-                    </form>
                   </div>
                 </div>
               </div>
