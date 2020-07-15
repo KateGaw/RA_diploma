@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import Catalog from "./Catalog";
-import Search from "./Search";
+import Search from "../Search/Search";
 
 const CatalogMenu = (props) => {
   const [isLoading, setIsLoading] = useState(true);
