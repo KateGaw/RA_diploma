@@ -32,6 +32,7 @@ const CatalogMenu = (props) => {
 
   const searchSubmitHandler = (item) => {
     if (item !== []) {
+      // console.log(item);
       setItems(item);
     }
   };

@@ -13,13 +13,13 @@ const Catalog = (props) => {
   const [buttonClick, setButtonClick] = useState(false);
   const [itemsCounter, setItemsCounter] = useState(6);
   const [newItems, setNewItems] = useState([]);
-  const [buttonVisibile, setButtonVisile] = useState(true);
+  const [buttonVisibile, setButtonVisible] = useState(true);
 
   const [currentCategoryId, setCurrentCategoryId] = useState(props.id);
   if (currentCategoryId !== props.id) {
     setItemsCounter(6);
     setCurrentCategoryId(props.id);
-    setButtonVisile(true);
+    setButtonVisible(true);
   }
 
   const add = (newItem) => setCatalog((catalog) => catalog.concat(newItem));
@@ -45,16 +45,21 @@ const Catalog = (props) => {
   // LOAD DATA WHEN ADD_BUTTON CLICKED
   useEffect(() => {
     if (buttonClick) {
-      api.getMoreItems(
+      const output = [
         props.id,
         itemsCounter,
-        setButtonVisile,
+        setButtonVisible,
         setButtonClick,
         setNewItems,
-        setItemsCounter
-      );
+        setItemsCounter,
+      ];
+      if (props.searchText === "") {
+        api.getMoreItems(...output);
+      } else {
+        api.getMoreItemsFilter(...output, props.searchText);
+      }
     }
-  }, [props.id, buttonClick, itemsCounter]);
+  }, [props.id, buttonClick, itemsCounter, props.searchText]);
 
   // BUTTON VISIBILITY CONDITIONS
   useEffect(() => {
@@ -62,12 +67,12 @@ const Catalog = (props) => {
       newItems.map((item) => add(item));
       setNewItems([]);
       if (newItems.length < 6) {
-        setButtonVisile(false);
+        setButtonVisible(false);
       }
     }
     (catalog.length < 6 || catalog.length % 6 !== 0) &&
       catalog.length !== 0 &&
-      setButtonVisile(false);
+      setButtonVisible(false);
   }, [catalog, newItems, itemsCounter]);
 
   return isLoading ? (
