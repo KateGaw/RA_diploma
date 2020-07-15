@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { routePaths } from "./routePaths";
 import headerlogo from "./img/header-logo.png";
 import "./App.css";
 
@@ -82,24 +83,15 @@ function App() {
               <Banner />
 
               <Switch>
-                <Route path="/" exact>
-                  <MainPage />
-                </Route>
-                <Route path="/catalog">
-                  <CatalogPage />
-                </Route>
-                <Route path="/about">
-                  <AboutPage />
-                </Route>
-                <Route path="/contacts">
-                  <ContactsPage />
-                </Route>
-                <Route path="/chart">
-                  <ChartPage />
-                </Route>
-                <Route>
-                  <ErrorPage />
-                </Route>
+                <Route exact path={routePaths.MainPage} component={MainPage} />
+                <Route path={routePaths.CatalogPage} component={CatalogPage} />
+                <Route path={routePaths.AboutPage} component={AboutPage} />
+                <Route
+                  path={routePaths.ContactsPage}
+                  component={ContactsPage}
+                />
+                <Route path={routePaths.ChartPage} component={ChartPage} />
+                <Route component={ErrorPage} />
               </Switch>
             </div>
           </div>
