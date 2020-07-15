@@ -1,21 +1,12 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from '../../../utils/api';
 
 const Search = (props) => {
-  const path = "http://localhost:7070/api/items";
   const [inputValue, setInputValue] = useState("");
   const [findItems, setFindItems] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(
-        props.id === 0
-          ? `${path}?q=${inputValue}`
-          : `${path}?categoryId=${props.id}?q=${inputValue}`
-      )
-      .then((response) => {
-        setFindItems(response.data);
-      });
+    api.getSearchResult(props.id, inputValue, setFindItems);
   }, [props.id, inputValue]);
 
   const changeHandler = (event) => {
