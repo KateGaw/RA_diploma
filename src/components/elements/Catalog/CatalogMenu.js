@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import api from '../../../utils/api';
 
 import Catalog from "./Catalog";
 import Search from "../Search/Search";
@@ -15,10 +15,7 @@ const CatalogMenu = (props) => {
 
   useEffect(() => {
     setIsLoading(true);
-    axios.get("http://localhost:7070/api/categories").then((response) => {
-      setCategories(response.data);
-      setIsLoading(false);
-    });
+    api.getCatalogCategories(setCategories, setIsLoading);
   }, []);
 
   const clickHandler = (event) => {
