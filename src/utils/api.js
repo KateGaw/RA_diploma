@@ -88,4 +88,10 @@ export default {
       setIsLoading(false);
     });
   },
+  getItemAllInfo: (itemId, setItem, setIsLoading) => {
+    return axios.get(`${path}items/${itemId}`).then((response) => {
+      setItem(response.data);
+      setIsLoading(false);
+    });
+  },
 };

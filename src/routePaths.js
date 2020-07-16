@@ -4,4 +4,5 @@ export const routePaths = {
     AboutPage: '/about',
     ContactsPage: '/contacts',
     ChartPage: '/chart',
+    ItemPage: '/product/:id'
 };

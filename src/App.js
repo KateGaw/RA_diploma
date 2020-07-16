@@ -6,6 +6,7 @@ import "./App.css";
 
 import MainPage from "./components/pages/MainPage";
 import CatalogPage from "./components/pages/CatalogPage";
+import ItemPage from "./components/pages/ItemPage";
 import AboutPage from "./components/pages/AboutPage";
 import ContactsPage from "./components/pages/ContactsPage";
 import ChartPage from "./components/pages/ChartPage";
@@ -83,6 +84,7 @@ function App() {
                   component={ContactsPage}
                 />
                 <Route path={routePaths.ChartPage} component={ChartPage} />
+                <Route path={routePaths.ItemPage} component={ItemPage} />
                 <Route component={ErrorPage} />
               </Switch>
             </div>

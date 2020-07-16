@@ -2,6 +2,8 @@
 /*eslint-disable array-callback-return*/
 
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { routePaths } from "../../../routePaths";
 import api from "../../../utils/api";
 
 import Preloader from "../Preloader";
@@ -91,9 +93,20 @@ const Catalog = (props) => {
               <div className="card-body">
                 <p className="card-text">{item.title}</p>
                 <p className="card-text">{item.price}</p>
-                <a href="/products/1.html" className="btn btn-outline-primary">
+                <Link
+                  to={{
+                    pathname: routePaths.ItemPage.replace(
+                      ":id",
+                      item.id.toString()
+                    ),
+                    state: {
+                      id: item.id,
+                    },
+                  }}
+                  className="btn btn-outline-primary"
+                >
                   Заказать
-                </a>
+                </Link>
               </div>
             </div>
           </div>
