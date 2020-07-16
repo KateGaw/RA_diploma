@@ -14,6 +14,8 @@ import ErrorPage from "./components/pages/ErrorPage";
 import Banner from "./components/elements/Banner";
 import SearchBar from "./components/elements/Search/SearchBar";
 
+import ChartIcon from "./components/elements/Chart/ChartIcon";
+
 function App() {
   return (
     <>
@@ -54,13 +56,7 @@ function App() {
                   <div>
                     <div className="header-controls-pics">
                       <SearchBar />
-                      {/* <!-- Do programmatic navigation on click to /cart.html --> */}
-                      <Link to="/chart">
-                        <div className="header-controls-pic header-controls-cart">
-                          <div className="header-controls-cart-full">1</div>
-                          <div className="header-controls-cart-menu"></div>
-                        </div>
-                      </Link>
+                      <ChartIcon />
                     </div>
                   </div>
                 </div>

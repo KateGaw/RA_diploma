@@ -3,18 +3,20 @@
 import React, { useEffect, useState } from "react";
 import api from "../../utils/api";
 import Preloader from "../elements/Preloader";
-import { routePaths } from '../../routePaths';
+import { routePaths } from "../../routePaths";
+import { addItem } from "../elements/Chart/localStorage";
+import shortid from 'shortid';
 
 const ItemPage = (props) => {
   const itemId = props.location.state.id;
   const [isLoading, setIsLoading] = useState(true);
   const [item, setItem] = useState([]);
-  const [sizeSelected, setSizeSelected] = useState(false); //выбран ли размер
-  const [counter, setCounter] = useState(1); // выбранное количество единиц товара
+  const [sizeSelected, setSizeSelected] = useState(false);
+  const [selectedSize, setSelectedSize] = useState("");
+  const [counter, setCounter] = useState(1);
   const [chartButtonDisable, setChartButtonDisable] = useState(true);
   const [availableSizes, setAvailableSizes] = useState(false);
 
-  // DATA LOADER
   useEffect(() => {
     setIsLoading(true);
     api.getItemAllInfo(itemId, setItem, setIsLoading);
@@ -27,9 +29,9 @@ const ItemPage = (props) => {
     }
     event.target.classList.add("selected");
     setSizeSelected(true);
+    setSelectedSize(event.target.innerHTML);
   };
 
-  // проверяем есть ли доступные размеры, если нет оставляем триггер на нетображении блока с корзиной
   useEffect(() => {
     if (item.sizes !== undefined) {
       item.sizes.map((item) => {
@@ -38,7 +40,6 @@ const ItemPage = (props) => {
     }
   }, [item]);
 
-  // проверяем выбран ли размер для able кнопки в корзину
   useEffect(() => {
     if (sizeSelected) {
       setChartButtonDisable(false);
@@ -58,10 +59,11 @@ const ItemPage = (props) => {
   };
 
   const chartClickHandler = () => {
+    addItem(shortid.generate(), [item.id, item.title, selectedSize, item.price, counter]);
     props.history.push({
       pathname: routePaths.ChartPage,
     });
-  }
+  };
 
   return isLoading ? (
     <Preloader />
