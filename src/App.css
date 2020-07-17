@@ -513,6 +513,7 @@ section {
 .catalog-item-size {
     display: inline-block;
     padding: 0 10px;
+    cursor: pointer;
 }
 
 .catalog-item-size.selected {
@@ -655,4 +656,23 @@ h2,
 
 .hidden {
     visibility: hidden;
+}
+
+.orderModal {
+    width: 66%;
+    height: 40%;
+    border: 1px solid rgba(0, 0, 0, .125);
+    text-align: center;
+    margin: auto;
+    border-radius: 13px;
+    padding: 15px;
+    position: absolute;
+    top: 30%;
+    left: 17%;
+    background-color: white;
+    z-index: 100;
+}
+
+.modalButton {
+    width: 30%;
 }

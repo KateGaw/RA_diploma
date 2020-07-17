@@ -1,15 +1,20 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { routePaths } from "./routePaths";
 import headerlogo from "./img/header-logo.png";
 import "./App.css";
 
 import MainPage from "./components/pages/MainPage";
 import CatalogPage from "./components/pages/CatalogPage";
+import ItemPage from "./components/pages/ItemPage";
 import AboutPage from "./components/pages/AboutPage";
 import ContactsPage from "./components/pages/ContactsPage";
 import ChartPage from "./components/pages/ChartPage";
 import ErrorPage from "./components/pages/ErrorPage";
 import Banner from "./components/elements/Banner";
+import SearchBar from "./components/elements/Search/SearchBar";
+
+import ChartIcon from "./components/elements/Chart/ChartIcon";
 
 function App() {
   return (
@@ -50,24 +55,9 @@ function App() {
 
                   <div>
                     <div className="header-controls-pics">
-                      <div
-                        data-id="search-expander"
-                        className="header-controls-pic header-controls-search"
-                      ></div>
-                      {/* <!-- Do programmatic navigation on click to /cart.html --> */}
-                      <Link to="/chart">
-                        <div className="header-controls-pic header-controls-cart">
-                          <div className="header-controls-cart-full">1</div>
-                          <div className="header-controls-cart-menu"></div>
-                        </div>
-                      </Link>
+                      <SearchBar />
+                      <ChartIcon />
                     </div>
-                    <form
-                      data-id="search-form"
-                      className="header-controls-search-form form-inline invisible"
-                    >
-                      <input className="form-control" placeholder="Поиск" />
-                    </form>
                   </div>
                 </div>
               </div>
@@ -82,24 +72,16 @@ function App() {
               <Banner />
 
               <Switch>
-                <Route path="/" exact>
-                  <MainPage />
-                </Route>
-                <Route path="/catalog">
-                  <CatalogPage />
-                </Route>
-                <Route path="/about">
-                  <AboutPage />
-                </Route>
-                <Route path="/contacts">
-                  <ContactsPage />
-                </Route>
-                <Route path="/chart">
-                  <ChartPage />
-                </Route>
-                <Route>
-                  <ErrorPage />
-                </Route>
+                <Route exact path={routePaths.MainPage} component={MainPage} />
+                <Route path={routePaths.CatalogPage} component={CatalogPage} />
+                <Route path={routePaths.AboutPage} component={AboutPage} />
+                <Route
+                  path={routePaths.ContactsPage}
+                  component={ContactsPage}
+                />
+                <Route path={routePaths.ChartPage} component={ChartPage} />
+                <Route path={routePaths.ItemPage} component={ItemPage} />
+                <Route component={ErrorPage} />
               </Switch>
             </div>
           </div>
