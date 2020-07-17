@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { routePaths } from "../../../routePaths";
 import api from "../../../utils/api";
+import nopicture from "../../../img/noimage.png";
 
 import Preloader from "../Preloader";
 
@@ -77,9 +78,13 @@ const Catalog = (props) => {
       setButtonVisible(false);
   }, [catalog, newItems, itemsCounter]);
 
+  const handleImageError = (event) => {
+    event.target.src = nopicture;
+  };
+
   return isLoading ? (
     <Preloader />
-  ) : (
+  ) : catalog.length > 0 ? (
     <>
       <div className="row">
         {catalog.map((item) => (
@@ -89,6 +94,7 @@ const Catalog = (props) => {
                 src={item.images[0]}
                 className="card-img-top img-fluid"
                 alt={item.title}
+                onError={handleImageError}
               />
               <div className="card-body">
                 <p className="card-text">{item.title}</p>
@@ -132,6 +138,8 @@ const Catalog = (props) => {
         )}
       </div>
     </>
+  ) : (
+    <div className="text-center">Записей не найдено</div>
   );
 };
 

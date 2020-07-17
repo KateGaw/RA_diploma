@@ -7,8 +7,12 @@ export default {
       .then((response) => {
         setCatalog(response.data);
         setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
       });
   },
+
   getMoreItems: (
     id,
     itemsCounter,
@@ -25,7 +29,6 @@ export default {
       )
       .then((response) => {
         if (response.data.length === 0) {
-          //если данных нет, то скрываем кнопку
           setButtonVisible(false);
           setButtonClick(false);
         } else {
@@ -35,6 +38,7 @@ export default {
         }
       });
   },
+
   getMoreItemsFilter: (
     id,
     itemsCounter,
@@ -63,6 +67,7 @@ export default {
         }
       });
   },
+
   getSearchResult: (id, inputValue, setFindItems) => {
     return axios
       .get(
@@ -75,26 +80,41 @@ export default {
       });
   },
   getCatalogCategories: (setCategories, setIsLoading) => {
-    return axios.get(`/categories`).then((response) => {
-      setCategories(response.data);
-      setIsLoading(false);
-    });
+    return axios
+      .get(`/categories`)
+      .then((response) => {
+        setCategories(response.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
   },
   getTopSales: (setSales, setIsLoading) => {
-    return axios.get(`/top-sales`).then((response) => {
-      setSales(response.data);
-      setIsLoading(false);
-    });
+    return axios
+      .get(`/top-sales`)
+      .then((response) => {
+        setSales(response.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
   },
   getItemAllInfo: (itemId, setItem, setIsLoading) => {
-    return axios.get(`/items/${itemId}`).then((response) => {
-      setItem(response.data);
-      setIsLoading(false);
-    });
+    return axios
+      .get(`/items/${itemId}`)
+      .then((response) => {
+        setItem(response.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+      });
   },
   getOrder: (output, setResult) => {
     const headers = {
-      "Content-Type" : "application/json",
+      "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Credentials": true,
     };

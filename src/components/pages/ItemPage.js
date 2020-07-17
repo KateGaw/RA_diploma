@@ -5,7 +5,8 @@ import api from "../../utils/api";
 import Preloader from "../elements/Preloader";
 import { routePaths } from "../../routePaths";
 import { addItem } from "../elements/Chart/localStorage";
-import shortid from 'shortid';
+import shortid from "shortid";
+import nopicture from "../../img/noimage.png";
 
 const ItemPage = (props) => {
   const itemId = props.location.state.id;
@@ -59,10 +60,20 @@ const ItemPage = (props) => {
   };
 
   const chartClickHandler = () => {
-    addItem(shortid.generate(), [item.id, item.title, selectedSize, item.price, counter]);
+    addItem(shortid.generate(), [
+      item.id,
+      item.title,
+      selectedSize,
+      item.price,
+      counter,
+    ]);
     props.history.push({
       pathname: routePaths.ChartPage,
     });
+  };
+
+  const handleImageError = (event) => {
+    event.target.src = nopicture;
   };
 
   return isLoading ? (
@@ -72,7 +83,12 @@ const ItemPage = (props) => {
       <h2 className="text-center">{item.title}</h2>
       <div className="row">
         <div className="col-5">
-          <img src={item.images[0]} className="img-fluid" alt="" />
+          <img
+            src={item.images[0]}
+            className="img-fluid"
+            alt=""
+            onError={handleImageError}
+          />
         </div>
         <div className="col-7">
           <table className="table table-bordered">

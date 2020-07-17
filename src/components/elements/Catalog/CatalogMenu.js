@@ -87,7 +87,7 @@ const CatalogMenu = (props) => {
         className="catalog-categories nav justify-content-center"
         id="container"
       >
-        {!isLoading && (
+        {!isLoading && categories.length > 0 && (
           <>
             <li className="nav-item">
               <Link

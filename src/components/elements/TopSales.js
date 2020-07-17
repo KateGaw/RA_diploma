@@ -18,7 +18,7 @@ const TopSales = () => {
       <h2 className="text-center">Хиты продаж!</h2>
       {isLoading ? (
         <Preloader />
-      ) : (
+      ) : sales.length > 0 ? (
         <div className="row">
           {sales.map((item) => (
             <div className="col-4" key={item.id}>
@@ -32,24 +32,26 @@ const TopSales = () => {
                   <p className="card-text">{item.title}</p>
                   <p className="card-text">{item.price}</p>
                   <Link
-                  to={{
-                    pathname: routePaths.ItemPage.replace(
-                      ":id",
-                      item.id.toString()
-                    ),
-                    state: {
-                      id: item.id,
-                    },
-                  }}
-                  className="btn btn-outline-primary"
-                >
-                  Заказать
-                </Link>
+                    to={{
+                      pathname: routePaths.ItemPage.replace(
+                        ":id",
+                        item.id.toString()
+                      ),
+                      state: {
+                        id: item.id,
+                      },
+                    }}
+                    className="btn btn-outline-primary"
+                  >
+                    Заказать
+                  </Link>
                 </div>
               </div>
             </div>
           ))}
         </div>
+      ) : (
+        <div className="text-center">Записей не найдено</div>
       )}
     </section>
   );
