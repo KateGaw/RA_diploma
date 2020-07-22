@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import api from "../../utils/api";
 import Preloader from "../elements/Preloader";
 import { routePaths } from "../../routePaths";
-import { addItem } from "../elements/Chart/localStorage";
+import { addItem } from "../../utils/localStorage";
 import shortid from "shortid";
 import nopicture from "../../img/noimage.png";
 
@@ -24,11 +24,6 @@ const ItemPage = (props) => {
   }, [itemId]);
 
   const handleSizeClick = (event) => {
-    const sizes = document.getElementsByClassName("catalog-item-size");
-    for (let i = 0; i < sizes.length; i++) {
-      sizes[i].classList.remove("selected");
-    }
-    event.target.classList.add("selected");
     setSizeSelected(true);
     setSelectedSize(event.target.innerHTML);
   };
@@ -129,7 +124,11 @@ const ItemPage = (props) => {
                       i.avalible && (
                         <span
                           key={index}
-                          className="catalog-item-size"
+                          className={
+                            selectedSize === i.size
+                              ? "catalog-item-size selected"
+                              : "catalog-item-size"
+                          }
                           onClick={handleSizeClick}
                         >
                           {i.size}

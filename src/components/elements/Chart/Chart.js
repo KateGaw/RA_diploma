@@ -1,7 +1,7 @@
 /*eslint-disable array-callback-return*/
 
 import React, { useEffect, useState } from "react";
-import { getItemsArray, deleteItem, findKeyById } from "./localStorage";
+import { getItemsArray, deleteItem, findKeyById } from "../../../utils/localStorage";
 import { Link } from "react-router-dom";
 import { routePaths } from "../../../routePaths";
 

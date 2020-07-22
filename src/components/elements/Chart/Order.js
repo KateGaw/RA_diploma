@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import api from "../../../utils/api";
-import { getItemsArray, clearStorage } from "./localStorage";
+import { getItemsArray, clearStorage } from "../../../utils/localStorage";
 import Preloader from "../Preloader";
 
 const Order = () => {
@@ -15,6 +15,7 @@ const Order = () => {
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [result, setResult] = useState(null);
   const [orderFinish, setOrderFinish] = useState(false);
+  const [modalVisible, setModalVisible] = useState(true);
 
   useEffect(() => {
     if (chartItems.length > 0 && phone !== "" && address !== "" && agreement) {
@@ -63,10 +64,6 @@ const Order = () => {
     setSendOrder(true);
   };
 
-  const handleModalClick = (event) => {
-    event.target.closest(".orderModal").style.display = "none";
-  };
-
   return (
     <section className="order">
       <h2 className="text-center">Оформить заказ</h2>
@@ -74,8 +71,8 @@ const Order = () => {
         <Preloader />
       ) : (
         <div className="card" style={{ maxWidth: "30rem", margin: "0 auto" }}>
-          {orderFinish && (
-            <div className="orderModal">
+          {orderFinish ? (
+            <div className={modalVisible ? "orderModal" : "hidden"}>
               {result === 204 ? (
                 <p>Заказ успешно оформлен!</p>
               ) : (
@@ -83,12 +80,12 @@ const Order = () => {
               )}
               <button
                 className="btn btn-outline-secondary modalButton"
-                onClick={handleModalClick}
+                onClick={() => setModalVisible(false)}
               >
                 OK
               </button>
             </div>
-          )}
+          ) : null}
 
           <form className="card-body">
             <div className="form-group">

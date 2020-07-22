@@ -1,29 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { routePaths } from "../../../routePaths";
 
 const SearchBar = (props) => {
   const [inputValue, setInputValue] = useState("");
+  const [searchVisibility, setSearchVisibility] = useState(false);
 
-  useEffect(() => {
-    const searchButton = document.getElementById("search_button");
-    const searchField = document.getElementById("search_field");
-
-    searchButton.addEventListener("click", () => {
-      if (searchField.classList.contains("invisible")) {
-        searchField.classList.remove("invisible");
+  const clickHandler = () => {
+    if (!searchVisibility) {
+      setSearchVisibility(true);
+    } else {
+      if (inputValue === "") {
+        setSearchVisibility(false);
       } else {
-        if (inputValue === "") {
-          searchField.classList.add("invisible");
-        } else {
-          props.history.push({
-            pathname: routePaths.CatalogPage,
-            search: inputValue,
-          });
-        }
+        props.history.push({
+          pathname: routePaths.CatalogPage,
+          search: inputValue,
+        });
       }
-    });
-  }, [inputValue, props.history]);
+    }
+  };
 
   return (
     <>
@@ -31,12 +27,17 @@ const SearchBar = (props) => {
         id="search_button"
         data-id="search-expander"
         className="header-controls-pic header-controls-search"
+        onClick={clickHandler}
       />
 
       <form
         id="search_field"
         data-id="search-form"
-        className="header-controls-search-form form-inline invisible"
+        className={
+          searchVisibility
+            ? "header-controls-search-form form-inline"
+            : "header-controls-search-form form-inline invisible"
+        }
       >
         <input
           className="form-control"

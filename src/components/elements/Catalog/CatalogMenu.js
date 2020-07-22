@@ -40,13 +40,6 @@ const CatalogMenu = (props) => {
   // изменение категории
   const clickHandler = (event) => {
     event.preventDefault();
-    const container = document.getElementById("container");
-    const links = container.getElementsByClassName("nav-link");
-    for (let i = 0; i < links.length; i++) {
-      links[i].id === event.target.id
-        ? links[i].classList.add("active")
-        : links[i].classList.remove("active");
-    }
     setChoosenId(event.target.id);
   };
 
@@ -92,7 +85,9 @@ const CatalogMenu = (props) => {
             <li className="nav-item">
               <Link
                 to="#"
-                className="nav-link active"
+                className={
+                  Number(choosenId) === 0 ? "nav-link active" : "nav-link"
+                }
                 id="0"
                 onClick={clickHandler}
               >
@@ -103,7 +98,11 @@ const CatalogMenu = (props) => {
               <li className="nav-item" key={item.id}>
                 <Link
                   to="#"
-                  className="nav-link"
+                  className={
+                    Number(choosenId) === item.id
+                      ? "nav-link active"
+                      : "nav-link"
+                  }
                   id={item.id}
                   onClick={clickHandler}
                 >

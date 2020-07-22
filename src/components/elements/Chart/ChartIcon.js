@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import { countItems } from "./localStorage";
+import { countItems } from "../../../utils/localStorage";
 
 const ChartIcon = (props) => {
   const [chartCounter, setChartCounter] = useState(0);
